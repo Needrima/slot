@@ -18,6 +18,7 @@ Add oAuth scopes:
     app_mentions:read
     channels:history
     channels:read
+    chat:write.public
     chat:write
     im:history
     im:read
@@ -32,6 +33,7 @@ subsribe to the following bot events:
     message.mpim
     message.groups
     message.channels
+    im_history_changed
 navigate back to 'oAuth and permissions' tab 
 click the 'Install to workspace' button
 copy the 'bot token' and store somwhere safe like an environmental variable
