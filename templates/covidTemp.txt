@@ -1,0 +1,12 @@
+Country: {{.Country}}
+Total Cases: {{.TotalCases}}
+Today's Cases: {{.TodaysCases}}
+Total Deaths: {{.TotalDeaths}}
+Today's Deaths: {{.TodaysDeaths}}
+Recovered cases: {{.Recovered}}
+Active cases: {{.Active}}
+Critical: {{.Critical}}
+Cases Per Million: {{.CPM}}
+Deaths Per Million: {{.DPM}}
+Total Tests: {{.TotalTests}}
+Tests Per Million: {{.TPM}}

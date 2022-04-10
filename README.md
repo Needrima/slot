@@ -1,7 +1,7 @@
 # slot
 slot is a slack bot for weather forecast, email validation check e.t.c
 
-** BOT INSTALLATION INSTRUCTION **
+**BOT INSTALLATION INSTRUCTION**
 
 ```
 Instructions to get tokens:
@@ -40,3 +40,6 @@ copy the 'bot token' and store somwhere safe like an environmental variable
 NOTE: if any change is made after installing, you have to 'reinstall to workspace'
 
 ```
+
+**API for covid info**
+`https://coronavirus-19-api.herokuapp.com/countries/<country name>`

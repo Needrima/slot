@@ -1,0 +1,9 @@
+City: {{.City}}
+Temperature: {{.Temperature}}
+Feel's Like: {{.FeelsLike}}
+Minimum Temperature: {{.MinTemp}}
+Maximum Temperature: {{.MaxTemp}}
+Pressure: {{.Pressure}}
+Humidity: {{.Humidity}}
+Sea Level: {{.SeaLevel}}
+Ground Level: {{.GroundLevel}}
