@@ -1,5 +1,6 @@
 package models
 
+// covid model
 type CovidInfo struct {
 	Country      string `json:"country"`
 	TotalCases   int    `json:"cases"`
@@ -15,6 +16,7 @@ type CovidInfo struct {
 	TPM          int    `json:"testsPerOneMillion"` //Tests per million
 }
 
+// weather forecast model
 type WeatherInfo struct {
 	Temperature float64 `json:"temp"`
 	FeelsLike   float64 `json:"feels_like"`
@@ -29,4 +31,9 @@ type WeatherInfo struct {
 type Weather struct {
 	City        string `json:"name"`
 	WeatherInfo `json:"main"`
+}
+
+// lyrics model
+type Lyrics struct {
+	Lyrics string `json:"lyrics"`
 }

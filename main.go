@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"bytes"
 	"context"
 	"encoding/json"
@@ -74,7 +75,7 @@ func main() {
 			resp, err := http.Get(uri)
 			if err != nil {
 				fmt.Println("Resp error:", err)
-				response.Reply("I'm sleeping. Try again later")
+				response.Reply("Do not disturb me. Try again later")
 				return
 			}
 			defer resp.Body.Close()
@@ -82,7 +83,7 @@ func main() {
 			body, err := ioutil.ReadAll(resp.Body)
 			if err != nil {
 				fmt.Println("Readall error:", err)
-				response.Reply("I'm sleeping. Try again later")
+				response.Reply("Do not disturb me. Try again later")
 				return
 			}
 
@@ -119,7 +120,7 @@ func main() {
 			resp, err := http.Get(uri)
 			if err != nil {
 				fmt.Println("Resp error:", err)
-				response.Reply("I'm sleeping. Try again later")
+				response.Reply("Do not disturb me. Try again later")
 				return
 			}
 			defer resp.Body.Close()
@@ -127,7 +128,7 @@ func main() {
 			body, err := ioutil.ReadAll(resp.Body)
 			if err != nil {
 				fmt.Println("Readall error:", err)
-				response.Reply("I'm sleeping. Try again later")
+				response.Reply("Do not disturb me. Try again later")
 				return
 			}
 
@@ -155,6 +156,61 @@ func main() {
 			if err := tpl.ExecuteTemplate(buf, "weatherTemp.txt", weatherInfo); err != nil {
 				response.Reply("Something went wrong. Try again later")
 				return
+			}
+
+			reply := buf.String()
+			response.Reply(reply)
+		},
+	})
+
+	bot.Command("lyrics <title> by <artiste>", &slacker.CommandDefinition{
+		Description: "lyrics finder",
+		Example:     "lyrics no love by eminem",
+		Handler: func(botCtx slacker.BotContext, request slacker.Request, response slacker.ResponseWriter) {
+			title, artiste := strings.ToLower(strings.TrimSpace(request.Param("title"))), strings.ToLower(strings.TrimSpace(request.Param("artiste")))
+			uri := fmt.Sprintf("https://api.lyrics.ovh/v1/%s/%s", artiste, title)
+			resp, err := http.Get(uri)
+			if err != nil {
+				fmt.Println("Resp error:", err)
+				response.Reply("Do not disturb me. Try again later")
+				return
+			}
+			defer resp.Body.Close()
+
+			body, err := ioutil.ReadAll(resp.Body)
+			if err != nil {
+				fmt.Println("Readall error:", err)
+				response.Reply("Do not disturb me. Try again later")
+				return
+			}
+
+			fmt.Println(string(body))
+
+			var errMsg = map[string]interface{}{}
+			if err := json.Unmarshal(body, &errMsg); err != nil {
+				fmt.Println("JSON decoder error:", err)
+				response.Reply("Do not disturb me. Try again later")
+				return
+			}
+
+			if errMsg["error"] == "No lyrics found" {
+				response.Reply("no lyrics found")
+				return
+			}
+
+			var lyrics models.Lyrics
+			if err := json.Unmarshal(body, &lyrics); err != nil {
+				fmt.Println("JSON decoder error:", err)
+				response.Reply("Do not disturb me. Try again later")
+				return
+			}
+
+			buf := &bytes.Buffer{}
+			scanner := bufio.NewScanner(strings.NewReader(lyrics.Lyrics))
+			for scanner.Scan() {
+				line := scanner.Text()
+
+				buf.WriteString(line+"\n")
 			}
 
 			reply := buf.String()
