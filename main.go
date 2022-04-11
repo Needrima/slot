@@ -218,12 +218,6 @@ func main() {
 		},
 	})
 
-	bot.Command("ping", &slacker.CommandDefinition{
-		Handler: func(botCtx slacker.BotContext, request slacker.Request, response slacker.ResponseWriter) {
-			response.Reply("pong")
-		},
-	})
-
 	context, cancle := context.WithCancel(context.TODO())
 	defer cancle()
 	if err := bot.Listen(context); err != nil {
