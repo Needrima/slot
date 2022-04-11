@@ -1,5 +1,5 @@
 City: {{.City}}
-Temperature: {{.Temperature}}
+Temperature: {{.Temperature}} 
 Feel's Like: {{.FeelsLike}}
 Minimum Temperature: {{.MinTemp}}
 Maximum Temperature: {{.MaxTemp}}
