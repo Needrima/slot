@@ -210,7 +210,7 @@ func main() {
 			for scanner.Scan() {
 				line := scanner.Text()
 
-				buf.WriteString(line+"\n")
+				buf.WriteString(line + "\n")
 			}
 
 			reply := buf.String()
